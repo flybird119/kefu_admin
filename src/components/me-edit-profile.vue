@@ -5,7 +5,7 @@
             <el-row :gutter="10">
               <el-col :span="3">
                 <div class="mini-im-file-button" title="点击上传图片">
-                  <el-avatar :size="50" :src="form.avatar || 'http://qiniu.cmp520.com/avatar_default.png'"></el-avatar>
+                  <el-avatar :size="50" :src="form.avatar"></el-avatar>
                   <input onClick="this.value = null" @change="changeFile" type="file" accept="image/*">
                   <div v-show="isUploading" class="mini-im-file-percent">
                     <span>{{uploadPercent}}</span>

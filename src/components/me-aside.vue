@@ -1,7 +1,8 @@
 <template>
   <el-aside width="200px" class="mini-im-aside">
       <div class="mini-im-logo" @click="$router.push({ path: '/index'})">
-        <div><img :src="$store.getters.systemInfo.logo + '?id=' + Date.now()" alt=""></div>
+        <div v-if="$store.getters.systemInfo.logo"><img :src="$store.getters.systemInfo.logo + '?id=' + Date.now()" alt=""></div>
+        <div v-else><img src="../assets/kefu_logo.png" alt=""></div>
       </div>
         <el-menu
           :default-active="menuActive"
@@ -111,7 +112,7 @@ export default {
         align-items center
         border-bottom 1px solid #ddd
         img{
-          height : 35px
+          height : 30px
         }
       }
       .el-menu{

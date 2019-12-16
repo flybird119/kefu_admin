@@ -38,7 +38,7 @@
         label="头像"
         width="120">
        <template slot-scope="scope">
-          <el-avatar :size="40" :src="scope.row.avatar != '' ? scope.row.avatar : 'http://qiniu.cmp520.com/avatar_default.png'"></el-avatar>
+          <el-avatar :size="40" :src="scope.row.avatar"></el-avatar>
         </template>
       </el-table-column>
        <el-table-column

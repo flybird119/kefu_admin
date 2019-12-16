@@ -13,7 +13,7 @@
             <el-row :gutter="10">
               <el-col :span="3">
                 <div class="mini-im-file-button" title="点击上传图片">
-                  <img :src="systemInfo.logo || 'http://qiniu.cmp520.com/imgpng.png'" alt="点击上传图片">
+                  <img :src="systemInfo.logo" alt="点击上传图片">
                   <input
                     :disabled="!isRoot"
                     onClick="this.value = null"
@@ -53,7 +53,7 @@
             <el-row :gutter="10">
               <el-col :span="3">
                 <div class="mini-im-file-button" title="点击上传图片">
-                  <img :src="companyInfo.logo || 'http://qiniu.cmp520.com/imgpng.png'" alt="点击上传图片">
+                  <img :src="companyInfo.logo" alt="点击上传图片">
                   <input
                     :disabled="!isRoot"
                     onClick="this.value = null"

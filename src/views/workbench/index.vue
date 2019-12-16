@@ -93,7 +93,7 @@
                   <div class="mini-im-customer-title">请选择转接的客服 ({{filterAdmins.length}}人在线)</div>
                   <div class="mini-im-customer-item" :key="item.id" v-for="item in filterAdmins" @click="()=>transferCustomer(item)">
                     <el-avatar :size="30" class="mini-im-avatar">
-                      <img :src="item.avatar != '' ? item.avatar : 'http://qiniu.cmp520.com/avatar_default.png'"/>
+                      <img :src="item.avatar"/>
                     </el-avatar>
                     <span>{{item.nickname || item.username}}</span>
                   </div>

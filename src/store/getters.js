@@ -12,7 +12,7 @@ export default {
         if(state.adminInfo && state.adminInfo.avatar != ""){
             return state.adminInfo.avatar
         }else{
-            return 'http://qiniu.cmp520.com/avatar_default.png'
+            return ''
         }
     },
     // 获取昵称

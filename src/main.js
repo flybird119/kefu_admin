@@ -13,10 +13,7 @@ var moment = require('moment');
 moment.locale("zh-cn", momentLocal)
 
 import axios from 'axios'
-axios.defaults.baseURL = 'http://192.168.31.142:8088/v1'
-// axios.defaults.baseURL = 'http://domain.cmp520.com:89/v1'
-// axios.defaults.baseURL = 'https://im.cmp520.com/v1'
-
+axios.defaults.baseURL = 'http://localhost:8080/v1'
 // 添加请求拦截器
 axios.interceptors.request.use((config) => {
   var token = localStorage.getItem("Authorization")
