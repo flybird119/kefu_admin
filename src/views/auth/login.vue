@@ -3,7 +3,7 @@
       <div class="form">
           <div class="left">
               <div class="tit">欢迎回来， 请登录！</div>
-              <span>客服系统</span>
+              <span>客服系统-工作台</span>
               <div class="client">
                 <p>客户端下载</p>
                   <el-button @click="dmac" type="primary" size="mini" icon="el-icon-download">Mac 版下载</el-button>
