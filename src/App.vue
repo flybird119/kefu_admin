@@ -14,7 +14,6 @@ export default {
     // app init
     appInit(){
       if(!this.adminInfo){
-        console.log("app init")
         setTimeout(()=> this.appInit(), 50)
         return
       }
