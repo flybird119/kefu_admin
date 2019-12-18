@@ -599,7 +599,7 @@ export default {
       if(!(message.biz_type == "contacts" || message.biz_type == "pong" || message.biz_type == "welcome" || message.biz_type == "cancel" || message.biz_type == "handshake" || message.biz_type == "end" || message.biz_type == "timeout") && this.isPush && Push.Permission.has()){
         Push.create("收到一条新消息", {
             body: message.payload,
-            icon: 'http://qiniu.cmp520.com/logo_wc.png',
+            icon: this.$store.state.pushIcon,
             timeout: 5000,
             onClick: () => {
               this.$router.push({ path: '/workbench?uid=' + message.from_account})

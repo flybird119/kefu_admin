@@ -163,7 +163,7 @@ export default {
           if(!Push.Permission.has()) return
           Push.create("收到一条新消息", {
               body: message.payload,
-              icon: 'http://qiniu.cmp520.com/logo_wc.png',
+              icon: this.$store.state.pushIcon,
               timeout: 5000,
               onClick: () => {
                 this.$router.push({ path: '/workbench?uid=' + message.from_account})
