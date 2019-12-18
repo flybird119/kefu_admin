@@ -15,6 +15,10 @@ export default {
             return ''
         }
     },
+    // 获取上传mode
+    uploadMod(state){
+        return state.uploadToken.mode || -1
+    },  
     // 获取昵称
     nickname(state){
         if(state.adminInfo && state.adminInfo.nickname != ""){

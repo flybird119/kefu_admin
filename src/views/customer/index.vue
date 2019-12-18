@@ -38,7 +38,7 @@
         label="头像"
         width="120">
        <template slot-scope="scope">
-          <el-avatar :size="40" :src="scope.row.avatar"></el-avatar>
+          <el-avatar :size="40" :src="scope.row.avatar || $store.state.avatar"></el-avatar>
         </template>
       </el-table-column>
        <el-table-column

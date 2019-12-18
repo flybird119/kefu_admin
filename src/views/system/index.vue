@@ -197,26 +197,27 @@ export default {
     },
     //  系统logo上传
     systemLogoUpload(file) {
-      var fileDom = file.target;
-      var observer = {
-        next: res => {
-          this.isUploadingSysLogo = true;
-          this.uploadysLogoPercent = Math.ceil(res.total.percent) + "%";
-        },
-        error: err => {
+      var fileData = file.target.files[0];
+       upload({
+         file: fileData,
+         progress: (percent) => {
+            this.isUploadingSysLogo = true;
+            this.uploadysLogoPercent = percent + "%";
+         },
+         success: (url) => {
+            this.isUploadingSysLogo = false;
+            this.uploadysLogoPercent = "";
+            this.$message.success("上传成功");
+            var imgUrl = this.$store.getters.uploadToken.host + "/" + url;
+            this.systemInfo.logo = imgUrl;
+         },
+         error: (err)=>{
           this.isUploadingSysLogo = false;
           this.uploadysLogoPercent = "";
           this.$message.error(err.message);
-        },
-        complete: res => {
-          this.isUploadingSysLogo = false;
-          this.uploadysLogoPercent = "";
-          this.$message.success("上传成功");
-          var imgUrl = this.$store.getters.uploadToken.host + "/" + res.key;
-          this.systemInfo.logo = imgUrl;
-        }
-      };
-      upload(fileDom.files[0], observer);
+         }
+       });
+
     },
     // 保存系统配置
     saveSystem(){
@@ -232,6 +233,7 @@ export default {
             this.$store.commit('onChangeSystemInfo', response.data.data)
             this.$message.success("保存成功");
             this.$store.dispatch('ON_GET_SYSTEM')
+            this.$store.dispatch('ON_GET_UPLOADS_CONFIG')
         })
         .catch(error => {
           this.$message.error(error.response.data.message);
@@ -240,26 +242,29 @@ export default {
     },
     // 公司logo上传
     companyLogoUpload(file) {
-      var fileDom = file.target;
-      var observer = {
-        next: res => {
-          this.isUploadingCompany = true;
-          this.uploadCompanyPercent = Math.ceil(res.total.percent) + "%";
-        },
-        error: err => {
+
+       var fileData = file.target.files[0];
+       upload({
+         file: fileData,
+         progress: (percent) => {
+            this.isUploadingCompany = true;
+            this.uploadCompanyPercent = percent + "%";
+         },
+         success: (url) => {
+            this.isUploadingCompany = false;
+          this.uploadCompanyPercent = "";
+          this.$message.success("上传成功");
+          var imgUrl = this.$store.getters.uploadToken.host + "/" + url;
+          this.companyInfo.logo = imgUrl;
+         },
+         error: (err)=>{
           this.isUploadingCompany = false;
           this.uploadCompanyPercent = "";
           this.$message.error(err.message);
-        },
-        complete: res => {
-          this.isUploadingCompany = false;
-          this.uploadCompanyPercent = "";
-          this.$message.success("上传成功");
-          var imgUrl = this.$store.getters.uploadToken.host + "/" + res.key;
-          this.companyInfo.logo = imgUrl;
-        }
-      };
-      upload(fileDom.files[0], observer);
+         }
+       });
+
+       
     },
     // 保存公司配置
     saveCompany(){

@@ -5,7 +5,7 @@
             <el-row :gutter="10">
               <el-col :span="3">
                 <div class="mini-im-file-button" title="点击上传图片">
-                  <el-avatar :size="50" :src="form.avatar"></el-avatar>
+                  <el-avatar :size="50" :src="form.avatar || $store.state.avatar"></el-avatar>
                   <input onClick="this.value = null" @change="changeFile" type="file" accept="image/*">
                   <div v-show="isUploading" class="mini-im-file-percent">
                     <span>{{uploadPercent}}</span>
@@ -38,7 +38,6 @@
 <script>
 import axios from 'axios'
 import upload from '../common/upload'
-upload()
 export default {
   name: 'mini-im-edit-profile',
   data(){
@@ -90,26 +89,27 @@ export default {
     },
     // 上传头像
     changeFile(file){
-      var fileDom = file.target
-      var observer = {
-        next: (res) => {
-          this.isUploading = true
-          this.uploadPercent = Math.ceil(res.total.percent) + "%"
-        },
-        error: (err) => {
+
+      upload({
+         file: file.target.files[0],
+         progress: (percent) => {
+            this.isUploading = true
+          this.uploadPercent = percent + "%"
+         },
+         success: (url) => {
+            this.isUploading = false
+            this.uploadPercent = ""
+            this.$message.success("上传成功")
+            var imgUrl = this.$store.getters.uploadToken.host +"/"+ url
+            this.form.avatar = imgUrl
+         },
+         error: (err)=>{
           this.isUploading = false
           this.uploadPercent = ""
-           this.$message.error(err.message)
-        }, 
-        complete: (res) => {
-          this.isUploading = false
-          this.uploadPercent = ""
-          this.$message.success("上传成功")
-          var imgUrl = this.$store.getters.uploadToken.host +"/"+ res.key
-          this.form.avatar = imgUrl
-        }
-      }
-      upload(fileDom.files[0], observer)
+          this.$message.error(err.message)
+         }
+       });
+       
     }
   },
   watch: {

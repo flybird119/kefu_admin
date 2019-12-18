@@ -188,12 +188,6 @@
             </div>
             <div class="mini-im-chat-view-user">
               <el-tabs type="border-card">
-                <el-tab-pane label="订单信息">
-                  <OrderListComponent />
-                </el-tab-pane>
-                <el-tab-pane label="车辆信息">
-                  <CarListComponent />
-                </el-tab-pane>
                 <el-tab-pane label="用户信息">
                   <UserInfoComponent />
                 </el-tab-pane>
@@ -210,8 +204,6 @@
 import EmojiComponent from "./emoji"
 import ContactComponent from "./contact"
 import UserInfoComponent from "./user_info"
-import CarListComponent from "./car_list"
-import OrderListComponent from "./order_list"
 import CreateShortcutComponent from "./create_shortcut"
 import EditShortcutComponent from "./edit_shortcut"
 import ChatWindowComponent from "./chat_window"
@@ -227,9 +219,7 @@ export default {
     UserInfoComponent,
     ChatWindowComponent,
     CreateShortcutComponent,
-    EditShortcutComponent,
-    CarListComponent,
-    OrderListComponent
+    EditShortcutComponent
   },
   data(){
     return {
@@ -248,7 +238,6 @@ export default {
       getMessageRecordPageSize: 20,
       isInputPongIng: false,
       isSendPong: false,
-      qiniuSubscription: null,
       inputPongIngString: "对方正在输入...",
       isPush: false, // 是否可以推送消息
       isMessageEnd: false
@@ -694,24 +683,22 @@ export default {
         setTimeout(() => localMessage.isShowCancel = false, 10000)
         self.$previewRefresh()
         self.scrollIntoBottom()
-        var observer = {
-          next: function(res){
-            localMessage.percent = Math.ceil(res.total.percent);
-          },
-          error: function(err){
-            self.qiniuSubscription = null
-            localMessage.percent = 0
-            self.$message.error(err.message);
-          },
-          complete: function(res){
-            self.qiniuSubscription = null
+
+        upload({ file,
+         progress: (percent) => {
+           localMessage.percent = percent
+         },
+         success: (url) => {
             localMessage.percent = 100
-            var imgUrl = self.$store.getters.uploadToken.host + "/" + res.key;
-            // localMessage.payload = imgUrl
+            var imgUrl = self.$store.getters.uploadToken.host + "/" + url;
             self.$mimcInstance.sendMessage("photo", self.seviceCurrentUser.from_account, imgUrl)
-          }
-        }
-        self.qiniuSubscription = upload(file, observer);
+         },
+         error: (err)=>{
+           localMessage.percent = 0
+           self.$message.error(err.message);
+         }
+       });
+
       }
     },
     // 选择用户
