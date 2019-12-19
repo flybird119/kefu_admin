@@ -274,7 +274,9 @@ export default {
     let _timerout;
     document.addEventListener("mousemove", () =>{
       // 以下其他浏览器的聊天高度
-      this.$refs.miniImChatViewBontentBody.style.height = document.body.clientHeight - 155 + "px"
+      if(this.$refs.miniImChatViewBontentBody){
+        this.$refs.miniImChatViewBontentBody.style.height = document.body.clientHeight - 155 + "px"
+      }
       this.isPush = false;
       if(_timerout) clearTimeout(_timerout);
       _timerout = setTimeout(()=>{
@@ -901,14 +903,6 @@ export default {
       width 278px
       background-color #fff
       border-radius 0 0 5px 5px
-      .mini-im-flex{
-        height 100%
-        display flex
-        flex-direction column
-        &>div{
-          flex-grow 1
-        }
-      }
     }
   
   }

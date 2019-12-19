@@ -74,26 +74,29 @@ export default {
     },
      // 上传
     changeFile(file) {
-      var fileDom = file.target;
-      var observer = {
-        next: res => {
-          this.isUploading = true;
-          this.uploadPercent = Math.ceil(res.total.percent) + "%";
-        },
-        error: err => {
+
+      var fileData = file.target.files[0];
+       upload({
+         file: fileData,
+         progress: (percent) => {
+            this.isUploading = true;
+            this.uploadPercent = percent + "%";
+         },
+         success: (url) => {
+            this.isUploading = false;
+            this.uploadPercent = "";
+            this.$message.success("上传成功");
+            var imgUrl = this.$store.getters.uploadToken.host + "/" + url
+            this.form.avatar = imgUrl;
+         },
+         error: (err)=>{
           this.isUploading = false;
           this.uploadPercent = "";
           this.$message.error(err.message);
-        },
-        complete: res => {
-          this.isUploading = false;
-          this.uploadPercent = "";
-          this.$message.success("上传成功");
-          var imgUrl = this.$store.getters.uploadToken.host + "/" + res.key;
-          this.form.avatar = imgUrl;
-        }
-      };
-      upload(fileDom.files[0], observer);
+         }
+       });
+
+
     },
     // 保存
     save(){
