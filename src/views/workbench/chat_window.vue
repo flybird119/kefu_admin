@@ -188,7 +188,7 @@ export default {
     .text {
       display: flex;
       margin-top: 5px;
-
+      word-break:break-all;
       span {
         max-width: 40%;
         display: inline;
@@ -296,6 +296,7 @@ export default {
       .text, .photo {
         justify-content: flex-end;
         align-items flex-end
+        word-break:break-all;
         .cancel-btn{
           color #26a2ff
           font-size 12px
