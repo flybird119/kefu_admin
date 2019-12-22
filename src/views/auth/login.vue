@@ -80,10 +80,10 @@ export default {
       });
     },
     dmac(){
-      window.open("http://nas.cmp520.com:5000/sharing/FrxCxZDc2")
+      window.open("http://kf.aissz.com:666/static/app/mac-0.0.1.dmg")
     },
     dwin(){
-      window.open("http://nas.cmp520.com:5000/sharing/iZwtBETTu")
+      window.open("http://kf.aissz.com:666/static/app/win-0.0.1.exe")
     }
   }
 }
