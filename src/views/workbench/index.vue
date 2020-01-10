@@ -579,7 +579,7 @@ export default {
         this.removeMessage(message.from_account, message.payload)
       }
        // 判断是否是握手消息
-      if(message.biz_type == "handshake"){
+      if(message.biz_type == "handshake" ||  message.biz_type == "transfer"){
         setTimeout(() => {
           this.$mimcInstance.sendMessage("text", message.from_account, this.adminInfo.auto_reply)
           if(this.seviceCurrentUser == undefined || this.seviceCurrentUser == null) return
