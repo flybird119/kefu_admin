@@ -506,8 +506,8 @@ export default {
     },
     // 结束当前会话
     closeSession(){
-      this.$confirm("您确定结束当前回话吗?强制关闭可能会被客户投诉！", '温馨提示！', {
-        confirmButtonText: '关闭',
+      this.$confirm("您确定结束当前回话吗?强制结束可能会被客户投诉！", '温馨提示！', {
+        confirmButtonText: '结束',
         cancelButtonText: '取消',
         center: true,
         type: 'warning'
