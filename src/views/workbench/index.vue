@@ -105,7 +105,7 @@
                   转接客服
                 </el-button>
               </el-popover>
-              <el-button v-if="seviceCurrentUser.is_session_end == 0 && adminInfo.online != 0" @click="closeSession" icon="el-icon-close" size="small">关闭会话</el-button>
+              <el-button v-if="seviceCurrentUser.is_session_end == 0 && adminInfo.online != 0" @click="closeSession" icon="el-icon-close" size="small">结束会话</el-button>
             </el-row>
         </div>
          <div ref="miniImChatViewBontentBody" class="mini-im-chat-view-content-body">
@@ -504,9 +504,9 @@ export default {
       })
       
     },
-    // 关闭当前会话
+    // 结束当前会话
     closeSession(){
-      this.$confirm("您确定关闭当前回话吗?强制关闭可能会被客户投诉！", '温馨提示！', {
+      this.$confirm("您确定结束当前回话吗?强制关闭可能会被客户投诉！", '温馨提示！', {
         confirmButtonText: '关闭',
         cancelButtonText: '取消',
         center: true,
