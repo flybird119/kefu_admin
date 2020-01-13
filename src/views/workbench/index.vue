@@ -353,7 +353,6 @@ export default {
           this.adminInfo = null;
           this.init();
         }else{
-          var adminInfo = this.adminInfo
           adminInfo.online = 0
           this.$store.commit("onChangeAdminInfo", adminInfo)
         }
