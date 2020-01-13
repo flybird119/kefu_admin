@@ -333,7 +333,11 @@ export default {
           this.$message.warning("您当前状态为繁忙")
         }
         if(!status){
-          this.$message.info("登录异常，请刷新页面重试！")
+          this.$store.dispatch('ON_GET_ME').then(()=>{
+            if(this.adminInfo.online != 0){
+              this.init();
+            }
+          })
         }
       })
 
@@ -344,8 +348,13 @@ export default {
       this.$mimcInstance.addEventListener("disconnect", () => {
         console.log("链接断开！")
         var adminInfo = this.adminInfo
-        adminInfo.online = 0
-        this.$store.commit("onChangeAdminInfo", adminInfo)
+        if(adminInfo.online != 0){
+          this.init();
+        }else{
+          var adminInfo = this.adminInfo
+          adminInfo.online = 0
+          this.$store.commit("onChangeAdminInfo", adminInfo)
+        }
       })
     },
     // 快捷键换行

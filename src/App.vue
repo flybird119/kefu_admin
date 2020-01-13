@@ -66,6 +66,12 @@ export default {
           }, (isSuccess) => {
             // 初始化完成
             if(isSuccess){
+              // 监听登录状态
+              this.$mimcInstance.addEventListener("statusChange", (status) => {
+                if(!status && self.$store.getters.adminInfo.online != 0){
+                  self.watchLogin()
+                }
+              })
               self.watchLogin()
             }else{
               self.initMimc()
@@ -92,9 +98,9 @@ export default {
       try{
         var self = this
         if(self.$store.state.user != null) return;
-        if(self.$store.getters.adminInfo.online == 1){
+        if(self.$store.getters.adminInfo.online == 1 || self.$store.getters.adminInfo.online == 2){
           self.$mimcInstance.login(()=>{
-            self.changeUserOnlineStatus(1)
+            self.changeUserOnlineStatus(self.$store.getters.adminInfo.online)
             self.$store.dispatch('ON_RUN_LAST_ACTiIVITY')
             self.$store.dispatch('ON_GET_CONTACTS')
             self.$store.commit("onChangeMimcUser", self.$mimcInstance.user)
