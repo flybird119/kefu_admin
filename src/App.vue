@@ -72,6 +72,13 @@ export default {
                   self.watchLogin()
                 }
               })
+              // 监听连接断开
+              this.$mimcInstance.addEventListener("disconnect", () => {
+                console.log("链接断开！")
+                if(self.$store.getters.adminInfo.online != 0){
+                 self.watchLogin()
+                }
+              })
               self.watchLogin()
             }else{
               self.initMimc()

@@ -295,6 +295,7 @@ export default {
     // 初始化
     init(){
       if(!this.adminInfo){
+        this.$store.dispatch('ON_GET_ME')
         setTimeout(() => this.init(), 100)
         return
       }
@@ -349,6 +350,7 @@ export default {
         console.log("链接断开！")
         var adminInfo = this.adminInfo
         if(adminInfo.online != 0){
+          this.adminInfo = null;
           this.init();
         }else{
           var adminInfo = this.adminInfo
