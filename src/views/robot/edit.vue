@@ -82,10 +82,10 @@
         <el-button v-else class="button-new-tag" size="small" @click="showTagInput('dynamicTagsInput')">+ 新增</el-button>
         <div style="font-size:12px;">* 匹配该关键词进入人工，系统已内置： "人工"</div>
       </el-form-item>
-      <el-form-item v-show="formData.id != 1000000000" label="运行状态" :label-width="formLabelWidth">
+      <el-form-item v-show="formData.system != 1" label="运行状态" :label-width="formLabelWidth">
         <el-switch v-model="robotSwitch" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
       </el-form-item>
-      <el-form-item v-show="formData.id != 1000000000"  label="匹配平台" :label-width="formLabelWidth">
+      <el-form-item v-show="formData.system != 1"  label="匹配平台" :label-width="formLabelWidth">
         <el-select v-model="form.platform" placeholder="请选择匹配平台">
           <el-option
             :label="item.title"
