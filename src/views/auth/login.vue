@@ -43,6 +43,7 @@ export default {
   data(){
     return{
       form: {
+        auth_type: 1,
         username: "",
         password: ""
       }

@@ -572,6 +572,17 @@ export default {
       
       var nowTime = parseInt((new Date().getTime() +"").substr(0, 10))
       message.timestamp = parseInt((message.timestamp +"").substr(0, 10))
+       if(message.from_account == this.adminInfo.id && message.biz_type == "pong") return;
+      if(message.biz_type == "into") return;
+      if(message.from_account == this.adminInfo.id && this.seviceCurrentUser.from_account == message.to_account){
+        this.messageRecord.list.push(message)
+        if(message.biz_type == "cancel"){
+          this.removeMessage(message.from_account, message.payload)
+        }
+        this.scrollIntoBottom()
+        this.$previewRefresh()
+        return;
+      }
       // 文本消息
       if(message.biz_type == "text" && message.from_account == this.seviceCurrentUser.from_account){
          this.advanceText = ""

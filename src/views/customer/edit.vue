@@ -111,7 +111,7 @@ export default {
         .then(response => {
           try {
             loading.close();
-            this.$message.success("添加成功");
+            this.$message.success("修改成功");
             this.closeModal();
             this.complete(1);
           } catch (e) {

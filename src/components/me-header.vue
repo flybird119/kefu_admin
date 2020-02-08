@@ -80,7 +80,7 @@ export default {
             this.$store.commit("onChangeEditPasswordDialogFormVisible", true)
             break
           case 'c':
-            this.$confirm('您确定要退出登录吗? 退出登录后工作台也同时下线！', '温馨提示！', {
+            this.$confirm('您确定要退出登录吗? ', '温馨提示！', {
               confirmButtonText: '确定',
               cancelButtonText: '取消',
               center: true,
