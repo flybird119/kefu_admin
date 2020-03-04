@@ -240,7 +240,8 @@ export default {
       isSendPong: false,
       inputPongIngString: "对方正在输入...",
       isPush: false, // 是否可以推送消息
-      isMessageEnd: false
+      isMessageEnd: false,
+      mousemoveTimerout: null
     }
   },
   computed: {
@@ -271,24 +272,15 @@ export default {
     this.init()
 
     // 刷新鼠标动态
-    let _timerout;
-    document.addEventListener("mousemove", () =>{
-      // 以下其他浏览器的聊天高度
-      if(this.$refs.miniImChatViewBontentBody){
-        this.$refs.miniImChatViewBontentBody.style.height = document.body.clientHeight - 155 + "px"
-      }
-      this.isPush = false;
-      if(_timerout) clearTimeout(_timerout);
-      _timerout = setTimeout(()=>{
-        this.isPush = true;
-      }, 30000)
-    })
+    document.addEventListener("mousemove", this.onMousemoveEvent, false)
 
      // 粘贴事件
     document.addEventListener("paste", this.inputPaste, false)
 
   },
   beforeDestroy(){
+    document.removeEventListener("mousemove", this.onMousemoveEvent, false)
+    document.removeEventListener("paste", this.inputPaste, false)
     this.changeCurrentUser();
   },
   methods: {
@@ -357,6 +349,18 @@ export default {
           this.$store.commit("onChangeAdminInfo", adminInfo)
         }
       })
+    },
+    // 刷新鼠标动态 mousemove
+    onMousemoveEvent(){
+      // 以下其他浏览器的聊天高度
+      if(this.$refs.miniImChatViewBontentBody){
+        this.$refs.miniImChatViewBontentBody.style.height = document.body.clientHeight - 155 + "px"
+      }
+      this.isPush = false;
+      if(this.mousemoveTimerout) clearTimeout(this.mousemoveTimerout);
+      this.mousemoveTimerout = setTimeout(()=>{
+        this.isPush = true;
+      }, 30000)
     },
     // 快捷键换行
     enterShift(event){
